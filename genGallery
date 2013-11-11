@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 source_dir dest_dir";
+fi
+
+cat << EOF
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>$1</title>
+    <link rel='stylesheet' href='css/blueimp-gallery.min.css'>
+    <link rel='stylesheet' href='css/my.css'>
+  </head>
+  <body>
+    <div id="blueimp-gallery" class="blueimp-gallery">
+      <div class="slides"></div>
+      <h3 class="title"></h3>
+      <a class="prev">‹</a>
+      <a class="next">›</a>
+      <a class="close">×</a>
+      <a class="play-pause"></a>
+      <ol class="indicator"></ol>
+    </div>
+
+    <div id='links'>
+EOF
+
+cd $1
+ls *.jpg | while read f; do
+  echo "      <a href='$1/$f' title='$f'>"
+  echo "        <img src='$2/$f' alt='$f'>"
+  echo "      </a>"
+done
+
+cat << EOF2
+    </div>
+    <script src="js/blueimp-gallery.min.js"></script>
+    <script>
+      document.getElementById('links').onclick = function (event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+        blueimp.Gallery(links, options);
+      };
+    </script>
+  </body>
+</html>
+EOF2

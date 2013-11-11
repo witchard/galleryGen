@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 source_dir dest_dir";
+fi
+
+mogrify -path $2 -thumbnail 100x100^ -gravity center -extent 100x100 $1/*.jpg
