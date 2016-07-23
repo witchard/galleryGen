@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-  echo "Usage: $0 source_dir dest_dir";
+  echo "Usage: $0 image_dir thumb_dir";
+  exit
 fi
 
 cat << EOF
@@ -12,7 +13,7 @@ cat << EOF
     <link rel='stylesheet' href='css/blueimp-gallery.min.css'>
     <link rel='stylesheet' href='css/my.css'>
   </head>
-  <body>
+  <body bgcolor=black>
     <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>
       <h3 class="title"></h3>
