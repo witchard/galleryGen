@@ -9,27 +9,11 @@ cat << EOF
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$1</title>
-    <link rel='stylesheet' href='css/blueimp-gallery.min.css'>
-    <link rel='stylesheet' href='css/my.css'>
-    <script>
-      function openImg(thing)
-      {
-        window.open(document.title + '/' + thing.innerHTML, '_blank');
-      }
-    </script>
+    <link rel='stylesheet' href='css/lightgallery.min.css'>
   </head>
   <body bgcolor=black>
-    <div id="blueimp-gallery" class="blueimp-gallery">
-      <div class="slides"></div>
-      <h3 class="title" onClick="openImg(this)"></h3>
-      <a class="prev">‹</a>
-      <a class="next">›</a>
-      <a class="close">×</a>
-      <a class="play-pause"></a>
-      <ol class="indicator"></ol>
-    </div>
-
     <div id='links'>
 EOF
 
@@ -42,16 +26,14 @@ done
 
 cat << EOF2
     </div>
-    <script src="js/blueimp-gallery.min.js"></script>
+    <script src="js/lightgallery.min.js"></script>
+    <script src="js/lg-thumbnail.js"></script>
+    <script src="js/lg-zoom.js"></script>
+    <script src="js/lg-autoplay.js"></script>
+    <script src="js/lg-hash.js"></script>
+    <script src="js/lg-thumbnail.js"></script>
     <script>
-      document.getElementById('links').onclick = function (event) {
-        event = event || window.event;
-        var target = event.target || event.srcElement,
-        link = target.src ? target.parentNode : target,
-        options = {index: link, event: event},
-        links = this.getElementsByTagName('a');
-        blueimp.Gallery(links, options);
-      };
+      lightGallery(document.getElementById('links'), {thumbnail: true});
     </script>
   </body>
 </html>
